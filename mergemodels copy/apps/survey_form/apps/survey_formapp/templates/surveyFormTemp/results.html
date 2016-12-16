@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Results</title>
+    </head>
+    <div class="wrapper">
+    <body>
+        <h2> Thank you for subbmitting this form! You have submitted this form {{ request.session.counter }} times now </h2>
+        {% for info in request.session.data.items %}
+            <p> {{ info.0 }}: {{ info.1 }} </p>
+        {% endfor %}
+    <form action = "/goback" method = "POST">
+            {% csrf_token %}
+            <input type='submit' value='Go Back'>
+    </form>
+</div>
+    </body>
+</html>

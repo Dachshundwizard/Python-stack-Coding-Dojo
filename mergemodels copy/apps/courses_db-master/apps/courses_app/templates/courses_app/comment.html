@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="description" content="Coding Dojo Python/Django Courses assignment">
+        {% load staticfiles %}
+        <title>Course Comments</title>
+        <link rel="stylesheet" href="{% static 'courses_app/css/style.css' %}" media="screen" title="no title">
+    </head>
+    <body>
+        <main>
+            <h1>Here are the comments for this course!</h1>
+            <div id="commentwrapper">
+                <span>Course Name:</span>
+                <p>{{ course.name }}</p>
+        </main>
+
+    </body>
+</html>

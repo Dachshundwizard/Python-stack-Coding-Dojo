@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Hello</title>
+        {% load staticfiles %}
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}" media="screen" title="no title">
+    </head>
+    <body>
+        <main>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} Important: {% endif %}
+                {{ message }}
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <form action="/register" method="POST">
+            <fieldset>
+                <legend>Registration</legend>
+                {% csrf_token %}
+                <label> First Name:
+                    <input type="text" name="first_name">
+                </label>
+                <label>Last Name:
+                    <input type="text" name="last_name">
+                </label>
+                <label>Email:
+                    <input type="text" name="email">
+                </label>
+                <label>Password:
+                    <input type="password" name="password">
+                </label>
+                <label>Confirm Password:
+                    <input type="password" name="confirm_pw">
+                </label>
+                <input type="submit" value="Register">
+            </fieldset>
+        <form action="/login" method="POST">
+            <fieldset>
+                <legend>Login</legend>
+                {% csrf_token %}
+                <label>Email:
+                    <input type="text" name="email">
+                </label>
+                <label>Password:
+                    <input type="text" name="password">
+                </label>
+                <input type="submit" value="Login">
+            </fieldset>
+</main>
+    </body>
+</html>

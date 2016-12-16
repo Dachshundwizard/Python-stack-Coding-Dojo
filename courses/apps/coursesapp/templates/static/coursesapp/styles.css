@@ -1,0 +1,39 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: "sans-serif";
+}
+
+main {
+	width: 960px;
+	margin: 0px auto;
+	padding: 20px;
+	overflow: scroll;
+    color: black;
+    border: 1px solid gray;
+    box-shadow: 1px 1px 5px gray;
+}
+
+h2{
+    text-align: center;
+}
+
+
+#submitadd {
+	margin-left: 1000px;
+}
+
+#formid {
+	display: inline-block;
+	margin: 10px;
+}
+
+#centralize {
+	margin-top: 100px;
+}
+
+label {
+    display: inline-block;
+    vertical-align: top;
+    width: 35%;
+}
