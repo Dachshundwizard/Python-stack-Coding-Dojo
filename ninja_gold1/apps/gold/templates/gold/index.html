@@ -1,87 +1,63 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title> Ninja Gold </title>
-
-        <style>
-        #your {
-            display: inline-block;
-            background-color: green;
-            border-radius: 10px;
-        }
-
-        #stuffyadone h6{
-            text-align: center;
-            color: rgb(224, 2, 147);
-        }
-
-        .building{
-            display: inline-block;
-            border: 1px solid black;
-            color: lightblue;
-        }
-
-        input[type=submit] {
-        display: inline-block;
-        width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        box-sizing: border-box;
-        }
-
-        input{
-            color: blue;
-        }
-
-        </style>
-    </head>
-    <body>
-        <div id="your"</div>
-        <h3>Your Gold : Earned: {{request.session.gold}} </h3>
-
-        <div class="building">
-        <h5> Farm (earns 10-20 gold) </h5>
-        <form action="/process_money" method="POST">
-        {% csrf_token %}
-            <input type="hidden" name="building" value="farm">
-            <input type="submit" value="find Gold">
-        </form>
-        </div>
-
-        <div class="building">
-        <h5> Cave (earns 5-10 gold) </h5>
-        <form action="/process_money" method="POST">
-        {% csrf_token %}
-            <input type="hidden" name="building" value="cave">
-            <input type="submit" value="find Gold">
-        </form>
-        </div>
-
-        <div class="building">
-        <h5> House (earns 2-5 gold) </h5>
-        <form action="/process_money" method="POST">
-        {% csrf_token %}
-            <input type="hidden" name="building" value="house">
-            <input type="submit" value="find Gold">
-        </form>
-        </div>
-
-        <div class="building">
-        <h5> Casino (earns -50-50 gold) </h5>
-        <form action="/process_money" method="POST">
-        {% csrf_token %}
-            <input type="hidden" name="building" value="casino">
-            <input type="submit" value="find Gold">
-        </form>
-        </div>
-
-        <div id="stuffyadone">
-        {% for stuff in request.session.activity %}
-
-        <h6> {{ stuff }} </h6>
-        {% endfor %}
-    </div>
-    <a href="/reset"><button>Reset</button>
-    </body>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="description" content="Coding Dojo Python/Django Ninja Gold Assignment">
+	{% load staticfiles %}
+	<title>Django Ninja Gold</title>
+	<link rel="stylesheet" href="{% static 'ninjagold/css/styles.css' %}" media="screen">
+</head>
+<body>
+	<main>
+		<h1>Your Gold: <span id="gold">${{gold}}</span></h1>
+		<a href="/reset" id="reset">Reset Game</a>
+		<section id="places">
+			<article class="place">
+				<h2>Farm</h2>
+				<p>(earns 10-20 golds)</p>
+				<a href="/processgold/farm">Find Gold!</a>
+			</article>
+			<article class="place">
+				<h2>Cave</h2>
+				<p>(earns 5-10 golds)</p>
+				<a href="/processgold/cave">Find Gold!</a>
+			</article>
+			<article class="place">
+				<h2>House</h2>
+				<p>(earns 2-5 golds)</p>
+				<a href="/processgold/house">Find Gold!</a>
+			</article>
+			<article class="place">
+				<h2>Casino</h2>
+				<p>(earns/takes 0-50 golds)</p>
+				<a href="/processgold/casino">Find Gold!</a>
+			</article>
+		</section>
+		<section id="activites">
+			<h3>Activities:</h3>
+			<div id="actbox">
+				{% if not activities %}
+					<p>You currently have no activities...</p>
+				{% else %}
+					{% for activity in activities %}
+						<p class="{{ activity.class }}">{{ activity.activity }}<span>({{ activity.time }})</span></p>
+					{% endfor %}
+				{% endif %}
+			</div><!-- end_of_actbox-->
+		</section>
+	</main>
+	<script type="text/javascript">
+		function goldColor(){ //makes gold black or red depending on whether or not it's pos or neg
+			var gold = document.getElementById('gold')
+			if ({{gold}} < 0) {
+				gold.className = "red";
+			} else {
+				gold.className = "";
+			}
+		}
+		goldColor();
+	</script>
+</body>
 </html>
